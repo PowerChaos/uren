@@ -38,7 +38,7 @@ wachtwoord : 123456
 ## Projecten
 | id | klant |    naam 	 |
 |----|-------|-----------|
-| 3	 |   15  | Project A |
+| 3	 |   2   | Project A |
 
 ## Aanwezig
 | id |  uid | van  |  tot |	  Datum   | uren | info |
@@ -54,5 +54,5 @@ wachtwoord : 123456
 
 ### info
 b = betaald
-y = factueren
+y = factureren
 n = niet factureren
