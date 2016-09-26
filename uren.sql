@@ -50,10 +50,10 @@ INSERT INTO `gebruikers` (`id`, `naam`, `wachtwoord`, `rechten`) VALUES
 
 CREATE TABLE IF NOT EXISTS `klanten` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `naam` varchar(64) CHARACTER SET utf8_bin NOT NULL COMMENT 'Klant Naam',
-  `email` varchar(64) CHARACTER SET utf8_bin NOT NULL COMMENT 'Klant email',
+  `naam` varchar(64) COLLATE utf8_bin NOT NULL COMMENT 'Klant Naam',
+  `email` varchar(64) COLLATE utf8_bin NOT NULL COMMENT 'Klant email',
   `adress` tinytext COLLATE utf8_bin NOT NULL COMMENT 'klant adress',
-  `telefoon` varchar(20) CHARACTER SET utf8_bin NOT NULL COMMENT 'Klant email',
+  `telefoon` varchar(20) COLLATE utf8_bin NOT NULL COMMENT 'Klant email',
   PRIMARY KEY (`id`),
   UNIQUE KEY `naam` (`naam`),
   UNIQUE KEY `id` (`id`)
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `klanten` (
 CREATE TABLE IF NOT EXISTS `projecten` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `klant` tinyint(4) NOT NULL COMMENT 'Klant id',
-  `naam` varchar(64) CHARACTER SET utf8_bin NOT NULL COMMENT 'Project Naam',
+  `naam` varchar(64) COLLATE utf8_bin NOT NULL COMMENT 'Project Naam',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Projecten tabel' AUTO_INCREMENT=1 ;
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `details` (
   `kid` tinyint(4) NOT NULL COMMENT 'Klant ID',
   `pid` tinyint(4) NOT NULL COMMENT 'Project ID',
   `uren` tinytext COLLATE utf8_bin NOT NULL COMMENT 'Totaal Uren',
-  `factuur` varchar(1) CHARACTER SET utf8_bin NOT NULL COMMENT 'Factureren',
+  `factuur` varchar(1) COLLATE utf8_bin NOT NULL COMMENT 'Factureren',
   `info` tinytext COLLATE utf8_bin NOT NULL COMMENT 'Details info',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
