@@ -82,7 +82,6 @@ CREATE TABLE IF NOT EXISTS `projecten` (
 CREATE TABLE IF NOT EXISTS `aanwezig` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
   `uid` tinyint(4) NOT NULL COMMENT 'Gebruiker ID',
-  `klant` tinyint(4) NOT NULL COMMENT 'Klant ID',
   `van` tinytext COLLATE utf8_bin NOT NULL COMMENT 'aanwezig Van',
   `tot` tinytext COLLATE utf8_bin NOT NULL COMMENT 'Aanwezig Tot',
   `datum` tinytext COLLATE utf8_bin NOT NULL COMMENT 'Aanwezig Datum',
