@@ -10,34 +10,19 @@ if (u())
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href="../home">Knowledge Base</a>
+      <a class="navbar-brand" href="../home">Aanwezigheid</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-		<div class="col-sm-3 col-md-3">
-			<form class="navbar-form" role="search" action="../home" method="POST" name="searchbar">
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search" name="search">
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-					</div>
-				</div>
-			</form>
-		</div>
-      <ul class="nav navbar-nav navbar-right">
-	  	  	  <?php
-	  if (s())
-	  {
-?>		
+      <ul class="nav navbar-nav"> 
 		<li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Post Menu
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Registratie
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-        <li><a href="../s/nieuw">Nieuwe Post</a></li>	
+        <li><a href="../aanwezig">Nieuwe Aanwezigheid</a></li>	
         </ul>
       </li>
-<?php		
-	  }
-	  ?>
+	  </ul>
+	 <ul class="nav navbar-nav navbar-right"> 
 	  	  <?php
 	  if (a())
 	  {
@@ -48,6 +33,7 @@ if (u())
         <span class="caret"></span></a>
         <ul class="dropdown-menu">					
 		<li><a href="../a/gebruikers">Gebruikers</a></li>
+		<li><a href="../a/groepen">Groepen</a></li>
 		<li class="divider"></li>
 		<li><a href="../a/versie">Versie Controle</a></li>
         </ul>

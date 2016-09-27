@@ -56,6 +56,7 @@ catch(Exception $e) {
 	$_SESSION['id'] = $result2['id'];
 	$_SESSION['naam'] = $result2['naam'];
 	$_SESSION['hash'] = $passhash['wachtwoord'];
+	$_SESSION['groep'] = $result2['groep'];
 	
 	if ($result2['rechten'] == '3')
 	{

@@ -59,7 +59,7 @@ $_SESSION[ERROR] ="";
 <!-- use fixed data -->
 <script type="application/javascript">
 	$(document).ready(function() { 
-		$('#calendar').fullCalendar({
+		$('#calendar').fullCalendar({	
 			 events:{
 				url: '../ajax/events.php',
 				type: 'POST',
@@ -72,9 +72,9 @@ $_SESSION[ERROR] ="";
 			},
 			height: 500,
 			header: {
-				left: '',
+				left: 'today',
 				center: 'prev title next',
-				right: ''
+				right: 'month agendaWeek listMonth'
 			},
 			eventClick:  function(event, jsEvent, view) {
 				$('#modalTitle').html(event.datum);

@@ -44,15 +44,18 @@ if ($_POST['id'] >='1')
 		//end Loop
 		$table = "
 		<div class=\"alert alert-info\">
-		Uren OverZicht
+		<div class=\"row\">
+		<div class=\"col-sm-6\">OVerzicht van ".$info['van']." tot ".$info['tot']."</div>
+		<div class=\"col-sm-6 text-right\">".$info['uren']." uren</div>
+		</div>
 		</div>
 		<table border=1 id='hoofd' class=\"table table-striped table-bordered table-hover\">
 		<thead>
 		<tr>	
 		<td>van</td>
 		<td>Tot</td>
-		<td>KID</td>
-		<td>PID</td>
+		<td>Klant</td>
+		<td>Project</td>
 		<td>uren</td>
 		<td>info</td>
 		<td>Factuur</td>
@@ -60,11 +63,33 @@ if ($_POST['id'] >='1')
 		</thead>
 		<tbody>";
 		foreach($result2 as $info2) {
+			try{	
+				$stmt3 = $db->prepare("SELECT * FROM
+				klanten WHERE id = :klant ORDER BY id ASC
+				");
+				$stmt3->execute(array( 
+				':klant' => $info['kid'],
+				));
+				$klant = $stmt3->fetch(PDO::FETCH_ASSOC);
+				$stmt4 = $db->prepare("SELECT * FROM
+				projecten WHERE id = :project ORDER BY id ASC
+				");
+				$stmt4->execute(array( 
+				':project' => $info['pid'],
+				));
+				$project = $stmt4->fetch(PDO::FETCH_ASSOC);
+			}//end try
+			catch(Exception $e) {
+				echo '<h2><font color=red>';
+				var_dump($e->getMessage());
+				die ('</h2></font> ');
+			}		
+				
 			$table .= "<tr>";
 			$table .=  "<td class=warning >$info2[van]</td>";
 			$table .=  "<td class=warning >$info2[tot]</td>";
-			$table .=  "<td class=success>$info2[kid]</td>";
-			$table .=  "<td class=success>$info2[pid]</td>";
+			$table .=  "<td class=success>$klant[naam]</td>";
+			$table .=  "<td class=success>$project[naam]</td>";
 			$table .=  "<td class=danger>$info2[uren]</td>";
 			$table .=  "<td class=info>$info2[info]</td>";
 			$table .=  "<td class=danger >$info2[factuur]</td>";
@@ -74,10 +99,11 @@ if ($_POST['id'] >='1')
 			
 			
 		$out[] = array(
-        'start' => $info['datum'],
-		'datum' => $info['datum'],
+        'start' => $info['datum']."T".$info['van'],
+		'end' => $info['datum']."T".$info['tot'],
+		'datum' => "overzicht van ".$info['datum'],
         'title' => $info['info'],
-        'link' => "../ajax/details.php?id=$info[id]",
+        'link' => "../ajax/details/$info[id]",
 		'description' => $table,
 		//loop
 		);	
