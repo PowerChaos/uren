@@ -453,6 +453,153 @@ echo "<meta http-equiv=\"refresh\" content=\"0;URL=http://{$_SERVER['SERVER_NAME
 	Ruimte tussen verschillende post invoer functies
  */
 
+// verwerking details.php 
+
+if ($_POST['registratie'] == 'details') //Rechten aanpassen
+{
+	//klant nieuw
+	$awid = $_POST['id'];
+	$datum = $_POST['datum'];
+	$van = $_POST['van'];
+	$tot = $_POST['tot'];
+	$uren = dh($tot) - dh($van); 
+	$factuur = $_POST['factuur'];
+	$hc = $_POST['klant'];
+	$shc = $_POST['project'];
+	$info = $_POST['info'];
+	//klant edit
+	try{
+		$stmt = $db->prepare("select id from klanten WHERE id =:hc ");
+		$stmt->execute(
+		array(
+		':hc' => $hc, 
+		));
+		$count = $stmt->rowCount();
+		if (!empty($count))
+		{
+			$hc = $hc;				
+		}
+		else
+		{
+			$hc = preg_replace("/[^A-Za-z0-9 ]/", null, $hc);
+			while (is_numeric(substr($hc, 0, 1)))
+			{
+				$hc = substr($hc, 1);	
+			}
+			$hc = ucfirst(strtolower($hc));
+			$stmt = $db->prepare("select id from klanten WHERE naam =:hc ");
+			$stmt->execute(
+			array(
+			':hc' => $hc, 
+			));
+			$count = $stmt->rowCount();
+			if (!empty($count))
+			{
+				$result = $stmt->fetch(PDO::FETCH_ASSOC);		
+				$hc = $result['id'];				
+			}
+			else
+			{
+				$stmt = $db->prepare("INSERT INTO klanten (naam) VALUES (:hc) ");
+				$stmt->execute(
+				array(
+				':hc' => $hc, 
+				));
+				$hc = $db->lastInsertId();
+			}
+	}
+}
+	catch(Exception $e) {
+		echo '<h2><font color=red> lijn 508 error <br>';
+		var_dump($e->getMessage());
+		die ('</h2></font> ');
+	}
+	//end hc nieuw
+	
+	//shc nieuw
+	try{
+		$stmt = $db->prepare("select id from projecten WHERE id =:shc ");
+		$stmt->execute(
+		array(
+		':shc' => $shc, 
+		));
+		$count = $stmt->rowCount();
+		if (!empty($count))
+		{
+			$shc = $shc;				
+		}
+		else
+		{
+			$shc = preg_replace("/[^A-Za-z0-9 ]/", null, $shc);
+			while (is_numeric(substr($shc, 0, 1)))
+			{
+				$shc = substr($shc, 1);	
+			}
+			$shc = ucfirst(strtolower($shc));
+			
+			$stmt = $db->prepare("select id from projecten WHERE naam =:shc AND klant = :hc ");
+			$stmt->execute(
+			array(
+			':shc' => $shc,
+			':hc' => $hc,			
+			));
+			$count = $stmt->rowCount();
+			if (!empty($count))
+			{
+				$result = $stmt->fetch(PDO::FETCH_ASSOC);		
+				$shc = $result['id'];				
+			}		
+			else
+			{		
+				$stmt = $db->prepare("INSERT INTO projecten (naam,klant) VALUES (:shc,:hc) ");
+				$stmt->execute(
+				array(
+				':hc' => $hc,
+				':shc' => $shc,			
+				));
+				$shc = $db->lastInsertId();	
+			}
+		}
+	}
+	catch(Exception $e) {
+		echo '<h2><font color=red>';
+		var_dump($e->getMessage());
+		die ('</h2></font> ');
+	}	
+	
+	//end shc nieuw
+	
+	//post nieuw
+	
+	try{		
+		$stmt = $db->prepare("INSERT INTO details (awid,van,tot,datum,kid,pid,uren,factuur,info) VALUES (:awid,:van,:tot,:datum,:kid,:pid,:uren,:factuur,:info) ");
+		$stmt->execute(
+		array(
+		':awid' => $awid,
+		':van' => $van,
+		':tot' => $tot,
+		':datum' => $datum,
+		':kid' => $hc,
+		':pid' => $shc,
+		':uren' => $uren,
+		':factuur' => $factuur,
+		':info' => $info,
+		));
+	}
+	catch(Exception $e) {
+		echo '<h2><font color=red>';
+		var_dump($e->getMessage());
+		die ('</h2></font> ');
+	}		
+	
+	$_SESSION[ERROR] = "Nieuw Detail aangemaakt voor id $awid" ;
+	echo "<meta http-equiv=\"refresh\" content=\"0;URL=http://{$_SERVER['SERVER_NAME']}/details/$awid\" />";
+}
+//einde verwerking nieuw.php
+
+/*
+	Ruimte tussen verschillende post invoer functies
+ */
 	
 //Geen Direct Acces
 if (empty($_POST)) // Geen direct acces :D

@@ -1,5 +1,21 @@
 <?php
-require(getenv("DOCUMENT_ROOT")."/functions/database.php");	
+require(getenv("DOCUMENT_ROOT")."/functions/database.php");
+function rc($minVal = 0, $maxVal = 255)
+{
+	
+    // Make sure the parameters will result in valid colours
+    $minVal = $minVal < 0 || $minVal > 255 ? 0 : $minVal;
+    $maxVal = $maxVal < 0 || $maxVal > 255 ? 255 : $maxVal;
+	
+    // Generate 3 values
+    $r = mt_rand($minVal, $maxVal);
+    $g = mt_rand($minVal, $maxVal);
+    $b = mt_rand($minVal, $maxVal);
+	
+    // Return a hex colour ID string
+    return sprintf('#%02X%02X%02X', $r, $g, $b);
+	
+}	
 if ($_POST['id'] >='1')
 {
 	$id = $_POST['id'];
@@ -23,7 +39,10 @@ if ($_POST['id'] >='1')
 		die ('</h2></font> ');
 	}
 	$out = array();
-
+	$color = rc(0,125);
+	$color1 = rc(125,250);
+	$count = "0";
+	$factuur = "0";
 	foreach($result as $info)
 	{
 		try{	
@@ -35,12 +54,23 @@ if ($_POST['id'] >='1')
 			':datum' => $info['datum'],
 			));
 			$result2 = $stmt2->fetchall(PDO::FETCH_ASSOC);
+			$count = $stmt2->RowCount();
+			if ($count >=1)
+			{
+				$color2 = $color1;
+				$ingevuld = "1"; 
+			}
+			else
+			{
+				$color2 = $color;
+				$ingevuld = "0";				
+			}
 		}//end try
 		catch(Exception $e) {
 			echo '<h2><font color=red>';
 			var_dump($e->getMessage());
 			die ('</h2></font> ');
-		}	
+		}		
 		//end Loop
 		$table = "
 		<div class=\"alert alert-info\">
@@ -63,7 +93,9 @@ if ($_POST['id'] >='1')
 		</thead>
 		<tbody>";
 		foreach($result2 as $info2) {
-			try{	
+			try{
+				$count += $info2['uren'];
+				$factuur += ($info2['factuur'] == "y")?$info2['uren']:"0";
 				$stmt3 = $db->prepare("SELECT * FROM
 				klanten WHERE id = :klant ORDER BY id ASC
 				");
@@ -95,19 +127,25 @@ if ($_POST['id'] >='1')
 			$table .=  "<td class=danger >$info2[factuur]</td>";
 			$table .=  "</tr>";
 		}
+		$table .= "<tr><td colspan=\"3\"></td>
+		<td>Totaal Aantal Uren:</td>
+		<td class='alert alert-info'>$count</td>
+		<td>Te Facturen uren:</td>
+		<td class='alert alert-danger'>$factuur</td></tr>";
 		$table .=  "</tbody></table>";				
-			
-			
+					
 		$out[] = array(
         'start' => $info['datum']."T".$info['van'],
 		'end' => $info['datum']."T".$info['tot'],
 		'datum' => "overzicht van ".$info['datum'],
         'title' => $info['info'],
-        'link' => "../ajax/details/$info[id]",
+        'link' => "../details/$info[id]",
 		'description' => $table,
-		//loop
+		'color' => $color2,
+		'volledig' => $ingevuld,
+		'kleur' => $color2,
 		);	
-	};
+	}; //loop
 	
 	// output to the browser
 	echo json_encode($out);	

@@ -5,9 +5,7 @@ RewriteRule ^logout$ index.php?action=logout
 RewriteRule ^sessionexpired$ index.php?session=expired
 RewriteRule ^a/([a-zA-Z0-9_-]+)$ index.php?admin=$1
 RewriteRule ^s/([a-zA-Z0-9_-]+)$ index.php?staff=$1
-RewriteRule ^sub/([0-9]+)$ index.php?page=sub&sub=$1
-RewriteRule ^zoek/([a-zA-Z0-9_-]+)$ index.php?page=search&search=$1
-RewriteRule ^post/([0-9]+)$ index.php?page=post&post=$1
+RewriteRule ^details/([0-9]+)$ index.php?page=details&details=$1
 
 RewriteRule ^([a-zA-Z0-9_-]+)$ index.php?page=$1
 RewriteCond %{REQUEST_FILENAME} !-f

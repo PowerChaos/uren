@@ -53,7 +53,7 @@ echo "<h1>".$_SESSION[ERROR]."</h1>";
 $_SESSION[ERROR] ="";
 ?>
 <div class="alert alert-success text-center">
-	<strong>Kalender OverZicht</strong>
+	<strong>Aanwezigheid OverZicht</strong>
 </div>
 <div id="calendar"></div>
 <!-- use fixed data -->
@@ -81,10 +81,46 @@ $_SESSION[ERROR] ="";
 				$('#modalBody').html(event.description);
 				$('#eventUrl').attr('href',event.link);
 				$('#fullCalModal').modal();
+			},
+		eventRender: function(event, element, view) {
+			if (event.volledig == "1")
+			{
+				$("#volledig").removeAttr('bgcolor');
+				$("#volledig").attr('bgcolor', event.kleur);
+			};
+			if (event.volledig == "0")
+			{
+				$("#niet-volledig").removeAttr('bgcolor');
+				$("#niet-volledig").attr('bgcolor', event.kleur);
 			}
+			//alert(event.volledig);
+			},
+		
 		});
 	});
 </script>
+	<style>
+		#legend h4 {
+		text-shadow: 2px 2px #FF0000;
+		}
+	</style>
+	
+<table class="table text-center" id='legend'>
+    <thead>
+		<tr>
+			<th><h3>Legende</h3></th>
+		</tr>
+    </thead>
+    <tbody>
+		<tr>
+			<td id="volledig" bgcolor="orange"><font color='white'><h4>Aanwezigheid is Volledig Ingevuld</h4></font></td>
+		</tr>
+		<tr>
+			<td id="niet-volledig" bgcolor="black"><font color='white'><h4>Aanwezigheid is Niet Volledig ingevuld</h4></font></td>
+		</tr>		
+		</tbody>
+		</table>
+		
 <div id="fullCalModal" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -94,8 +130,7 @@ $_SESSION[ERROR] ="";
             </div>
             <div id="modalBody" class="modal-body"></div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button class="btn btn-success"><a id="eventUrl" target="_blank">Event Page</a></button>
+                <a id="eventUrl" class="btn btn-success btn-block btn-lg"><i class="material-icons">playlist_add</i></a>
             </div>
         </div>
     </div>
