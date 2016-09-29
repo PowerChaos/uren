@@ -32,8 +32,24 @@ $_SESSION[ERROR] ="";
 			<div class=\"alert alert-info\">
 			<div class=\"row\">
 			<div class=\"col-sm-4\">OVerzicht van ".$result3['van']." tot ".$result3['tot']." op ".$result3['datum']."</div>
-			<div class=\"col-sm-4 text-center\">$print</div>
-			<div class=\"col-sm-4 text-right\">".$result3['uren']." uren</div>
+			<div class=\"col-sm-4 text-center\">$print</div>";
+			if (s()){ 
+			if ($fac != "y"){
+			$table .="<div class='col-sm-4 text-right'>
+			$result3[uren] uren<br>
+			<a href='#' class='btn btn-warning btn-sm' data-toggle='modal' data-target='#modal' id='$result3[id]' onclick='post(this.id,\"factuur\");'><i class='fi-checkbox'></i>Gefactureerd<span class='sr-only'>Gefactureerd</span></a>
+			</div>";
+			}
+			else
+			{
+			$table .= "<div class=\"col-sm-4 text-right\">".$result3['uren']." uren</div>";		
+			}
+			}
+			else
+			{
+			$table .= "<div class=\"col-sm-4 text-right\">".$result3['uren']." uren</div>";
+			}
+			$table .="
 			</div>
 			</div>
 			<div id='print'>
@@ -104,14 +120,8 @@ $_SESSION[ERROR] ="";
 			<tr>";
 			$table .=  "</tbody></table></div>";
 			echo $table;
-	?>
-	<div class="text-right">
-	<?php if (s()){ 
-	if ($fac != "y"){?>
-	<a href="#" class="btn btn-warning btn-sm" data-toggle='modal' data-target='#modal' id='<?php echo $result3['id'];?>' onclick='post(this.id,"factuur");'><i class="fi-checkbox"></i>Gefactureerd<span class="sr-only">Gefactureerd</span></a>
-	<?php } }
 	if ($fac != 'y'){?>
-	</div>
+	
 <script type="text/javascript">
 	function PrintElem(elem)
 	{	
@@ -255,18 +265,6 @@ $_SESSION[ERROR] ="";
 	});
 	
 </script>
-	<div class="alert alert-warning">
-		<div class="row">
-			<div class="span12">
-				<h2>POST DATA</h2>
-				<pre>
-					<?php print_r($_POST); ?>
-				</pre>
-			</div>
-		</div>
-	</div>
-
-
 <div class="alert alert-success text-center">
 	<strong>Nieuwe Detail Registratie</strong>
 </div>
@@ -276,15 +274,6 @@ $_SESSION[ERROR] ="";
 				<input type="hidden" name="registratie" value="details">
 				<input type="hidden" name="id" value="<?php echo $result3['id']?>">
 				<input type="hidden" name="datum" value="<?php echo $result3['datum'] ?>">
-					<div class="form-group">
-						<label class="control-label col-sm-2" for="info">info:</label>
-						<div class="col-sm-10">
-						<textarea rows="4" cols="50" class="form-control" name="info" id="info" aria-describedby="infoblock"></textarea>
-							<p id="infoblock" class="form-text text-muted">
-							beschrijving van de taak
-							</p>
-						</div>
-					</div>	
 				<div class="form-group">
 				<label class="control-label col-sm-2" for="van">van:</label>
 				<div class="col-sm-10">
@@ -350,6 +339,15 @@ $_SESSION[ERROR] ="";
 							</select>
 						</div>
 					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="info">info:</label>
+						<div class="col-sm-10">
+							<textarea rows="4" cols="50" class="form-control" name="info" id="info" aria-describedby="infoblock"></textarea>
+							<p id="infoblock" class="form-text text-muted">
+								beschrijving van de taak
+							</p>
+						</div>
+					</div>				
 		<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
       <button type="submit" id="submit" value="Submit" class="btn btn-success">Registreer Details</button>

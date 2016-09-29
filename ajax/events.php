@@ -7,9 +7,9 @@ if ($_POST['id'] >='1')
 	$start = $_POST['start'];
 	$end = $_POST['end'];
 	$groep = $_POST['groep'];
-	$color = "#D08040"; //rc(0,125);
-	$color1 = "#8028E0"; //rc(125,250);
-	$fcolor = "#008000";
+	$color = "#D05860"; // Niet volledig //rc(0,125);
+	$color1 = "#008000";  // Volledig//rc(125,250);
+	$fcolor = "#A0B0E0";
 	$out = array();
 	try{
 		$stmt = $db->prepare("SELECT * FROM groep WHERE id=:groep");

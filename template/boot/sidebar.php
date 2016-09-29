@@ -27,7 +27,8 @@ if (u())
 	  if (a())
 	  {
 		  
-?>					
+?>		
+<li><a href="../a/overzicht">OverZicht</a></li>			
 		<li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Admin Menu
         <span class="caret"></span></a>

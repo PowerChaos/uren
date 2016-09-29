@@ -1,5 +1,5 @@
 <?php
-$versie = "0.1.0";
+$versie = "1.0.0";
 if (a())
 {	
 	$ch = curl_init();

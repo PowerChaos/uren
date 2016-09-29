@@ -87,30 +87,34 @@ $_SESSION[ERROR] ="";
 	});
 </script>
 	<style>
-		#legend h4 {
-		text-shadow: 2px 2px #FF0000;
+		#legend h5 {
+		text-shadow: 2px 2px #000000;
 		}
 	</style>
-	
-<table class="table text-center" id='legend'>
-    <thead>
-		<tr>
-			<th><h3>Legende</h3></th>
-		</tr>
-    </thead>
-    <tbody>
-		<tr>
-			<td id="volledig" bgcolor="#8028E0" name="volledig"><font color='white'><h4>Aanwezigheid is Volledig Ingevuld</h4></font></td>
-		</tr>
-		<tr>
-			<td id="niet-volledig" bgcolor="#D08040" name="niet-volledig"><font color='white'><h4>Aanwezigheid is Niet Volledig ingevuld</h4></font></td>
-		</tr>
-		<tr>
-			<td id="factuur" bgcolor="#008000" name="factuur"><font color='white'><h4>Factuur al Aangemaakt</h4></font></td>
-		</tr>		
+<div class="row">
+<div class="col-sm-5"></div>
+<div class="col-sm-2">
+	<table class="table text-center" id='legend'>
+		<thead>
+			<tr>
+				<th><h3>Legende</h3></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td id="volledig" bgcolor="#008000" name="volledig"><font color='white'><h5>Volledig Ingevuld</h5></font></td>
+			</tr>
+			<tr>
+				<td id="niet-volledig" bgcolor="#D05860" name="niet-volledig"><font color='white'><h5>Niet Volledig ingevuld</h5></font></td>
+			</tr>
+			<tr>
+				<td id="factuur" bgcolor="#A0B0E0" name="factuur"><font color='white'><h5>Factuur al Aangemaakt</h5></font></td>
+			</tr>		
 		</tbody>
-		</table>
-		
+	</table>
+</div>
+<div class="col-sm-5"></div>
+</div>
 <div id="fullCalModal" class="modal fade">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
