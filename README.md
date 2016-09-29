@@ -21,14 +21,19 @@ wachtwoord : 123456
 #Database opbouw
 
 ## gebruikers
-| id |   naam 	 | wachtwoord | rechten |
-|----|-----------|------------|---------|
-| 1	 |	 Admin	 | 	  SHA1	  |    3  	|
-| 15 | 	 User	 |    SHA1	  |	   1  	|
+| id |   naam 	 | wachtwoord | rechten |groep|
+|----|-----------|------------|---------|-----|
+| 1	 |	 Admin	 | 	  SHA1	  |    3  	|  1  |
+| 15 | 	 User	 |    SHA1	  |	   1  	|     |
 ### info
-1 = gebruiker
-2 = staff
-3 = admin
+- 1 = gebruiker
+- 2 = staff
+- 3 = admin
+
+## groep
+| id | user  |    naam 	 |
+|----|-------|-----------|
+| 1  |  1,15 | TestGroep |
 
 ## klanten
 | id |	 naam  | email | adress | telefoon |
@@ -41,18 +46,21 @@ wachtwoord : 123456
 | 3	 |   2   | Project A |
 
 ## Aanwezig
-| id |  uid | van  |  tot |	  Datum   | uren | info |
-|----|------|------|------|-----------|------|------|
-| 4	 |	15  | 08:30| 16:30|01/01/2016 |   8	 | info |
+| id |  uid | van  |  tot |	  Datum   | uren | info |gefactureerd|
+|----|------|------|------|-----------|------|------|------------|
+| 4	 |	15  | 08:30| 16:30|01/01/2016 |   8	 | info |		n	 |
+
+### Factuur
++ y = bevestigd
++ n = niet bevestigd
 
 ## details
 | id | awid |  van  |  tot  |	 datum	 | kid | pid | uren | factuur | info |
 |----|------|-------|-------|------------|-----|-----|------|---------|------|
 | 5	 |	 4  | 08:30 | 10:30 | 01/01/2016 | 15  |  3  | 	2   |	y     | info |
 | 6	 |	 4  | 11:30 | 16:30 | 01/01/2016 | 15  |  3  | 	5   |	n     | info |
-| 7	 |	 4  | 10:30 | 11:30 | 01/01/2016 | 15  |  3  | 	1   |	b     | info |
+| 7	 |	 4  | 10:30 | 11:30 | 01/01/2016 | 15  |  3  | 	1   |	y     | info |
 
 ### info
-b = betaald
-y = factureren
-n = niet factureren
++ y = factureren
++ n = niet factureren

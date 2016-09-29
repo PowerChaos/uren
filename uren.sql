@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `aanwezig` (
   `datum` tinytext COLLATE utf8_bin NOT NULL COMMENT 'Aanwezig Datum',
   `uren` tinytext COLLATE utf8_bin NOT NULL COMMENT 'Totaal Uren',
   `info` tinytext COLLATE utf8_bin NOT NULL COMMENT 'Aanwezig info',
+  `gefactureerd` varchar(1) DEFAULT 'n' COLLATE utf8_bin NOT NULL COMMENT 'Factuur Aangemaakt',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='aanwezig Tabel' AUTO_INCREMENT=1 ;
