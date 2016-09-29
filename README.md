@@ -46,9 +46,9 @@ wachtwoord : 123456
 | 3	 |   2   | Project A |
 
 ## Aanwezig
-| id |  uid | van  |  tot |	  Datum   | uren | info |gefactureerd|
-|----|------|------|------|-----------|------|------|------------|
-| 4	 |	15  | 08:30| 16:30|01/01/2016 |   8	 | info |		n	 |
+| id |  uid | van  |  tot |	  Datum   | uren |gefactureerd|
+|----|------|------|------|-----------|------|------------|
+| 4	 |	15  | 08:30| 16:30|01/01/2016 |   8	 |		n	  |
 
 ### Factuur
 + y = bevestigd
