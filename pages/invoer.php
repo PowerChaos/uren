@@ -426,14 +426,13 @@ if ($_POST['registratie'] == 'aanwezig') //Rechten aanpassen
 	$naam = preg_replace("/[^A-Za-z09 ]/", null, $_POST['info']);
 	$naam = ucfirst(strtolower($naam));
 	try{
-$stmt = $db->prepare("INSERT INTO aanwezig (uid,datum,van,tot,info,uren) VALUES (:uid,:datum,:van,:tot,:info,:uren) ");
+$stmt = $db->prepare("INSERT INTO aanwezig (uid,datum,van,tot,uren) VALUES (:uid,:datum,:van,:tot,:uren) ");
 $stmt->execute(
 array(
 ':uid' => $uid,
 ':datum' => $datum, 
 ':van' => $van, 
 ':tot' => $tot, 
-':info' => $naam,
 ':uren' => $uren,  
 ));
 $last = $db->lastInsertId();

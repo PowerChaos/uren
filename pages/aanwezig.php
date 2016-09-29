@@ -45,28 +45,6 @@ $_SESSION[ERROR] ="";
 			die ('</h2></font> ');
 		}
 	?>
-<script type="text/javascript">
-$(document).ready(function() {
-//disable Submit Button
-$("#submit").attr('disabled', 'disabled');
-$("#submit").attr('class', 'btn btn-danger btn-block');
-$("form").keyup(function() {
-	// To Disable Submit Button
-	$("#submit").attr('disabled', 'disabled');
-	$("#submit").attr('class', 'btn btn-danger btn-block');
-	// Validating Fields
-	var info = $("#info").val();
-	var datum = $("#datum").val();
-	if (!(info == "" || datum == "")){
-		
-		// To Enable Submit Button
-		$("#submit").removeAttr('disabled');
-		$("#submit").removeAttr('class');
-		$("#submit").attr('class', 'btn btn-success btn-block');
-	}
-});
-});
-</script>
 <div class="alert alert-success text-center">
 	<strong>Nieuwe Aanwezigheid Registratie</strong>
 </div>
@@ -81,6 +59,7 @@ $("form").keyup(function() {
 							</select>
 						</div>
 					</div>
+					<!--
 					<div class="form-group">
 						<label class="control-label col-sm-2" for="info">Titel:</label>
 						<div class="col-sm-10">
@@ -89,7 +68,8 @@ $("form").keyup(function() {
 							korte beschrijving van max 32 characters voor weergave op kalendar
 							</p>
 						</div>
-					</div>	
+					</div>
+							-->					
 			<div class="form-group">
 			    <label class="control-label col-sm-2" for="date">Datum:</label>
 				<div class="col-sm-10">
@@ -143,7 +123,7 @@ $("form").keyup(function() {
 			</div>
 		<div class="form-group">
 		<div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" id="submit" value="Submit" class="btn btn-success">Registreer Aanwezigheid</button>
+      <button type="submit" id="submit" value="Submit" class="btn btn-success btn-block">Registreer Aanwezigheid</button>
 	  </div>
 	  </div>
 </form>

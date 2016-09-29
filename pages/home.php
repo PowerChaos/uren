@@ -65,6 +65,7 @@ $_SESSION[ERROR] ="";
 				type: 'POST',
 				 data: {
 					 id: '<?php echo $_SESSION[id]?>',
+					 groep: '<?php echo $_SESSION[groep]?>',
 				 },
 				error: function() {
 					alert('there was an error while fetching events!');
@@ -81,21 +82,7 @@ $_SESSION[ERROR] ="";
 				$('#modalBody').html(event.description);
 				$('#eventUrl').attr('href',event.link);
 				$('#fullCalModal').modal();
-			},
-		eventRender: function(event, element, view) {
-			if (event.volledig == "1")
-			{
-				$("#volledig").removeAttr('bgcolor');
-				$("#volledig").attr('bgcolor', event.kleur);
-			};
-			if (event.volledig == "0")
-			{
-				$("#niet-volledig").removeAttr('bgcolor');
-				$("#niet-volledig").attr('bgcolor', event.kleur);
-			}
-			//alert(event.volledig);
-			},
-		
+			},		
 		});
 	});
 </script>
@@ -113,10 +100,13 @@ $_SESSION[ERROR] ="";
     </thead>
     <tbody>
 		<tr>
-			<td id="volledig" bgcolor="orange"><font color='white'><h4>Aanwezigheid is Volledig Ingevuld</h4></font></td>
+			<td id="volledig" bgcolor="#8028E0" name="volledig"><font color='white'><h4>Aanwezigheid is Volledig Ingevuld</h4></font></td>
 		</tr>
 		<tr>
-			<td id="niet-volledig" bgcolor="black"><font color='white'><h4>Aanwezigheid is Niet Volledig ingevuld</h4></font></td>
+			<td id="niet-volledig" bgcolor="#D08040" name="niet-volledig"><font color='white'><h4>Aanwezigheid is Niet Volledig ingevuld</h4></font></td>
+		</tr>
+		<tr>
+			<td id="factuur" bgcolor="#008000" name="factuur"><font color='white'><h4>Factuur al Aangemaakt</h4></font></td>
 		</tr>		
 		</tbody>
 		</table>
