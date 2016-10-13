@@ -10,6 +10,7 @@ if ($_POST['id'] >='1')
 	$color = "#D05860"; // Niet volledig //rc(0,125);
 	$color1 = "#008000";  // Volledig//rc(125,250);
 	$fcolor = "#A0B0E0";
+	$ziek = "#5642f4";
 	$out = array();
 	try{
 		$stmt = $db->prepare("SELECT * FROM groep WHERE id=:groep");
@@ -52,7 +53,13 @@ if ($_POST['id'] >='1')
 								));
 								$result3 = $stmt2->fetchall(PDO::FETCH_ASSOC);
 								$detcount = $stmt2->RowCount();
-								if ($info['gefactureerd'] == "y")
+								$z = 0;
+								if ($info['ziek'] == "y")
+								{
+									$color2 = $ziek;
+									$z = 1;
+								}
+								elseif ($info['gefactureerd'] == "y")
 								{
 									$color2 = $fcolor;
 									
@@ -135,13 +142,18 @@ if ($_POST['id'] >='1')
 							<td class='alert alert-danger'>$factuur</td></tr>";
 							$table .=  "</tbody></table>";				
 							
+							$titel = ($z == "1")? $naam." Ziek":$naam." van ".$info['van'] ." tot ". $info['tot'];
+							$link = ($z == "1")?"#":"../details/$info[id]";
+							$day = ($z == "1")?"True":"";
+							
 							$out[] = array(
 							'start' => $info['datum']."T".$info['van'],
 							'end' => $info['datum']."T".$info['tot'],
 							'datum' => "overzicht van ".$info['datum'],
-							'title' => $naam." van ".$info['van'] ." tot ". $info['tot'],
-							'link' => "../details/$info[id]",
-							'description' => $table,
+							'title' => $titel,
+							'link' => $link,
+							'allDay' => $day,
+							'description' => $link=="#"?$titel:$table,
 							'color' => $color2,
 							);
 										
@@ -177,7 +189,13 @@ if ($_POST['id'] >='1')
 					));
 					$result3 = $stmt2->fetchall(PDO::FETCH_ASSOC);
 					$detcount = $stmt2->RowCount();
-					if ($info['gefactureerd'] == "y")
+					$z = 0;
+					if ($info['ziek'] == "y")
+					{
+						$color2 = $ziek;
+						$z = 1;
+					}
+					elseif ($info['gefactureerd'] == "y")
 					{
 						$color2 = $fcolor;
 						
@@ -260,13 +278,18 @@ if ($_POST['id'] >='1')
 				<td class='alert alert-danger'>$factuur</td></tr>";
 				$table .=  "</tbody></table>";				
 				
+				$titel = ($z == "1")? $naam." Ziek":$naam." van ".$info['van'] ." tot ". $info['tot'];
+				$link = ($z == "1")?"":"../details/$info[id]";
+				$day = ($z == "1")?"True":"";
+				
 				$out[] = array(
 				'start' => $info['datum']."T".$info['van'],
 				'end' => $info['datum']."T".$info['tot'],
 				'datum' => "overzicht van ".$info['datum'],
-				'title' => $naam." van ".$info['van'] ." tot ". $info['tot'],
-				'link' => "../details/$info[id]",
-				'description' => $table,
+				'title' => $titel,
+				'link' => $link,
+				'allDay' => $day,
+				'description' => $link==""?$titel:$table,
 				'color' => $color2,
 				);
 		}	

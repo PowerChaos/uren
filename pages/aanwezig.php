@@ -91,6 +91,7 @@ $_SESSION[ERROR] ="";
 						$tStart = strtotime($start);
 						$tEnd = strtotime($end);
 						$tNow = $tStart;
+						echo "<option value='z'>Ziek</option>";
 						while($tNow <= $tEnd){		
 							$time = date("H:i",$tNow);
 							$selected = ($time == '08:30')?"selected":"";

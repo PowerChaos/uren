@@ -421,19 +421,26 @@ if ($_POST['registratie'] == 'aanwezig') //Rechten aanpassen
 	$uid = $_POST['uid'];
 	$datum = $_POST['datum'];
 	$van = $_POST['van'];
-	$tot = $_POST['tot'];	
+	$tot = $_POST['tot'];
+	$z = "n";
+	if ($van == 'z'){
+		$van = "00:00";
+		$tot = "24:00";
+		$z = "y";
+	}	
 	$uren = dh($tot) - dh($van);
 	$naam = preg_replace("/[^A-Za-z09 ]/", null, $_POST['info']);
-	$naam = ucfirst(strtolower($naam));
+	$naam = ucfirst(strtolower($naam));		
 	try{
-$stmt = $db->prepare("INSERT INTO aanwezig (uid,datum,van,tot,uren) VALUES (:uid,:datum,:van,:tot,:uren) ");
+$stmt = $db->prepare("INSERT INTO aanwezig (uid,datum,van,tot,uren,ziek) VALUES (:uid,:datum,:van,:tot,:uren) ");
 $stmt->execute(
 array(
 ':uid' => $uid,
 ':datum' => $datum, 
 ':van' => $van, 
 ':tot' => $tot, 
-':uren' => $uren,  
+':uren' => $uren,
+':ziek' => $z,  
 ));
 $last = $db->lastInsertId();
 }
@@ -443,7 +450,7 @@ $last = $db->lastInsertId();
 		die ('</h2></font> ');
 	}
 $_SESSION[ERROR] = "Nieuwe aanwezigheid Geregistreerd" ;
-echo "<meta http-equiv=\"refresh\" content=\"0;URL=http://{$_SERVER['SERVER_NAME']}/details/$last\" />";	
+echo $van == "z"?"<meta http-equiv=\"refresh\" content=\"0;URL=http://{$_SERVER['SERVER_NAME']}/\" />":"<meta http-equiv=\"refresh\" content=\"0;URL=http://{$_SERVER['SERVER_NAME']}/details/$last\" />";	
 }
 //einde verwerking aanwezig.php
 
