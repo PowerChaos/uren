@@ -1,7 +1,5 @@
 <?php
 if (u()){
-echo "<h1>".$_SESSION[ERROR]."</h1>";
-$_SESSION[ERROR] ="";
 	if ($_GET['details'])
 	{
 		// parameters from URL

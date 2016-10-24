@@ -14,10 +14,9 @@ if (!u()){
         
        <form class="form-signin" method="post" id="login-form">
       
-        <h2 class="form-signin-heading"><?php
-    echo $_SESSION[ERROR]?$_SESSION[ERROR]:"Aanwezigheid Registratie"; //show our sesion error above the login form
-$_SESSION[ERROR]="";
-	?></h2><hr />
+        <h2 class="form-signin-heading">
+			Aanwezigheid Registratie
+			</h2><hr />
         
         <div id="error">
         <!-- error will be shown here ! -->
@@ -49,8 +48,6 @@ $_SESSION[ERROR]="";
 }
 if (u())
 {
-echo "<h1>".$_SESSION[ERROR]."</h1>";
-$_SESSION[ERROR] ="";
 ?>
 <div class="alert alert-success text-center">
 	<strong>Aanwezigheid OverZicht</strong>

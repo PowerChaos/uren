@@ -1,7 +1,5 @@
 <?php
 if (u()){
-echo "<h1>".$_SESSION[ERROR]."</h1>";
-$_SESSION[ERROR] ="";
 	require(getenv("DOCUMENT_ROOT")."/functions/database.php");
 	try{
 		$groep = $_SESSION['groep'];

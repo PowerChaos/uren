@@ -59,3 +59,12 @@ if (u())
 ?>
         <!-- Page Content -->
 <div class="col-sm-12 col-lg-12">
+	<?php
+		if ($_SESSION[ERROR] != "")
+		{	
+			echo "<div class='alert alert-success fade in text-center' data-dismiss='alert' role='alert'>
+			$_SESSION[ERROR]
+			</div>";
+			$_SESSION[ERROR] ="";
+		}
+	?>

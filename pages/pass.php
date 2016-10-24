@@ -1,5 +1,4 @@
-<?php echo "<h1>".$_SESSION[ERROR]."</h1>";
-$_SESSION[ERROR] ="";
+<?php
 if (u()){ //begin user
 ?>
 <form action="../invoer" method="post" id='pass' name='pass'>

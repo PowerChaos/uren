@@ -432,7 +432,7 @@ if ($_POST['registratie'] == 'aanwezig') //Rechten aanpassen
 	$naam = preg_replace("/[^A-Za-z09 ]/", null, $_POST['info']);
 	$naam = ucfirst(strtolower($naam));		
 	try{
-$stmt = $db->prepare("INSERT INTO aanwezig (uid,datum,van,tot,uren,ziek) VALUES (:uid,:datum,:van,:tot,:uren) ");
+$stmt = $db->prepare("INSERT INTO aanwezig (uid,datum,van,tot,uren,ziek) VALUES (:uid,:datum,:van,:tot,:uren,:ziek) ");
 $stmt->execute(
 array(
 ':uid' => $uid,
@@ -445,7 +445,7 @@ array(
 $last = $db->lastInsertId();
 }
 	catch(Exception $e) {
-		echo '<h2><font color=red> lijn 224 error <br>';
+		echo '<h2><font color=red> lijn 448 error <br>';
 		var_dump($e->getMessage());
 		die ('</h2></font> ');
 	}

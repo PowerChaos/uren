@@ -1,7 +1,5 @@
 <?php
 if (a()){
-echo "<h1>".$_SESSION[ERROR]."</h1>";
-$_SESSION[ERROR] ="";
 require(getenv("DOCUMENT_ROOT")."/functions/database.php");
 	try{	
 $stmt = $db->prepare("SELECT * FROM groep");
